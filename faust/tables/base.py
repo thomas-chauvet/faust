@@ -417,6 +417,8 @@ class Collection(Service, CollectionT):
             ts_keys.discard(key)
 
     def _changelog_topic_name(self) -> str:
+        if self.changelog_topic:
+            return self.changelog_topic.get_topic_name()
         return f"{self.app.conf.id}-{self.name}-changelog"
 
     def join(self, *fields: FieldDescriptorT) -> StreamT:
